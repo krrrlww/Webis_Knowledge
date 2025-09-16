@@ -1,0 +1,43 @@
+/* .vitepress/theme/custom.css */
+:root {
+    /* 品牌色彩 */
+    --vp-c-brand-1: #3eaf7c;
+    --vp-c-brand-2: #369870;
+    --vp-c-brand-3: #2d8063;
+    --vp-c-brand-soft: rgba(62, 175, 124, 0.14);
+
+    /* 背景色 */
+    --vp-c-bg: #ffffff;
+    --vp-c-bg-alt: #f6f6f7;
+    --vp-c-bg-elv: #ffffff;
+    --vp-c-bg-soft: #f6f6f7;
+
+    /* 文本色 */
+    --vp-c-text-1: rgba(60, 60, 67);
+    --vp-c-text-2: rgba(60, 60, 67, 0.78);
+    --vp-c-text-3: rgba(60, 60, 67, 0.56);
+
+    /* 边框色 */
+    --vp-c-divider: rgba(60, 60, 67, 0.29);
+    --vp-c-border: rgba(60, 60, 67, 0.23);
+
+    /* 控件色 */
+    --vp-c-gutter: rgba(60, 60, 67, 0.12);
+    --vp-c-neutral: rgba(60, 60, 67, 0.08);
+    --vp-c-neutral-inverse: rgba(255, 255, 255, 0.95);
+}
+
+/* 深色模式 */
+.dark {
+    --vp-c-bg: #1b1b1f;
+    --vp-c-bg-alt: #161618;
+    --vp-c-bg-elv: #202127;
+    --vp-c-bg-soft: #202127;
+
+    --vp-c-text-1: rgba(255, 255, 245, 0.86);
+    --vp-c-text-2: rgba(235, 235, 245, 0.6);
+    --vp-c-text-3: rgba(235, 235, 245, 0.38);
+
+    --vp-c-divider: rgba(84, 84, 88, 0.65);
+    --vp-c-border: rgba(82, 82, 89, 0.68);
+}
