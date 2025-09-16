@@ -4,7 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "Webis",
   description: "高效数据清洗框架",
-  base: '/Webis/',
+  base: '/Webis_Knowledge/',
   head: [["link", { rel: "icon", href: "/webis.svg" }]],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
