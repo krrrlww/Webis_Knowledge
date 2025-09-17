@@ -17,7 +17,7 @@ export default defineConfig({
           { text: '简介', link: '/简介/what_is_webis' },
           { text: '安装', link: '/安装/install' },
           { text: '使用', link: '/使用/quickstart' },
-          { text: '更多', link: '/更多/troubleshooting' },
+          { text: '更多', link: '/更多/Troubleshooting' },
         ]
       },
     ],
