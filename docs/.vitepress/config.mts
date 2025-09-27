@@ -50,6 +50,7 @@ export default defineConfig({
           { text: '疑难解答', link: '/更多/Troubleshooting' },
           { text: '性能优化', link: '/更多/Optimize' },
           { text: '开发背景', link: '/更多/background' },
+          { text: '多模态数据处理工具', link: '/更多/tool' },
         ]
       }
     ],
