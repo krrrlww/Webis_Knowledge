@@ -1,11 +1,11 @@
-# Webis支持多模态数据
+# Webis Supports Multimodal Data
 
-Webis 是一款强大的网页内容提取工具，不仅限于 HTML 网页内容的提取，还扩展支持多模态数据处理，涵盖 PDF、图片和文档（DOC）等多种输入格式。通过集成先进工具比如 PyMuPDF、Tesseract 和 LlamaIndex，Webis 能够高效清洗和提取多模态数据中的结构化内容，提供统一、干净的输出（如 JSON 或纯文本），满足多样化的数据处理需求。这一功能使其在复杂数据管道和跨格式内容分析场景中表现出色。
+Webis is a powerful web content extraction tool that extends beyond HTML web page content extraction to support multimodal data processing, covering multiple input formats such as PDF, images, and documents (DOC). By integrating advanced tools like PyMuPDF, Tesseract, and LlamaIndex, Webis can efficiently clean and extract structured content from multimodal data, providing unified, clean output (such as JSON or plain text) to meet diverse data processing needs. This feature makes it perform excellently in complex data pipelines and cross-format content analysis scenarios.
 
-## 支持PDF、图片和文档
+## Supporting PDF, Images, and Documents
 
-对于 PDF 文件，Webis 利用 PyMuPDF 进行高效解析，提取文本、表格和元数据，同时保留文档结构。PyMuPDF 的快速解析能力确保 Webis 能处理大型 PDF 文件，适合学术论文、报告等场景。对于图片输入，Webis 集成 Tesseract OCR 技术，精准提取图像中的文本内容，支持多语言识别，适用于扫描文档、截图或含文字的图像。针对 DOC 格式文档，Webis 借助 LlamaIndex 实现智能内容索引与提取，能够处理复杂的文档结构，提取关键信息并生成语义化输出。
+For PDF files, Webis utilizes PyMuPDF for efficient parsing, extracting text, tables, and metadata while preserving document structure. PyMuPDF's fast parsing capabilities ensure Webis can handle large PDF files, suitable for academic papers, reports, and other scenarios. For image input, Webis integrates Tesseract OCR technology to accurately extract text content from images, supporting multilingual recognition, applicable to scanned documents, screenshots, or images containing text. For DOC format documents, Webis leverages LlamaIndex to implement intelligent content indexing and extraction, capable of processing complex document structures, extracting key information, and generating semantic output.
 
-## 集成统一接口
+## Integrated Unified Interface
 
-Webis 的多模态支持通过统一接口实现，用户可通过 API 或 CLI 无缝处理不同格式的数据。其模块化设计确保工具间高效协作，清洗后的数据一致性高，适合数据分析、内容聚合等应用场景。未来，Webis 计划进一步优化多模态处理性能，扩展对视频和音频的支持。
+Webis's multimodal support is implemented through a unified interface, allowing users to seamlessly process data in different formats via API or CLI. Its modular design ensures efficient collaboration between tools, with highly consistent cleaned data, suitable for data analysis, content aggregation, and other application scenarios. In the future, Webis plans to further optimize multimodal processing performance and expand support for video and audio.

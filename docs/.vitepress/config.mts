@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "Webis",
-  description: "高效数据清洗框架",
+  description: "Efficient Data Cleaning Framework",
   base: '/',
   head: [["link", { rel: "icon", href: "/webis.svg" }]],
   themeConfig: {
@@ -14,10 +14,10 @@ export default defineConfig({
       {
         text: 'Document',
         items: [
-          { text: '简介', link: '/简介/what_is_webis' },
-          { text: '安装', link: '/安装/install' },
-          { text: '使用', link: '/使用/quickstart' },
-          { text: '更多', link: '/更多/Troubleshooting' },
+          { text: 'Introduction', link: '/简介/what_is_webis' },
+          { text: 'Installation', link: '/安装/install' },
+          { text: 'Usage', link: '/使用/quickstart' },
+          { text: 'More', link: '/更多/Troubleshooting' },
         ]
       },
     ],
@@ -25,41 +25,41 @@ export default defineConfig({
     sidebar: [
 
       {
-        text: '简介',
+        text: 'Introduction',
         items: [
-          { text: 'Webis是什么?', link: '/简介/what_is_webis' },
-          { text: '性能评估', link: '/简介/Performance' },
-          { text: '支持数据类型', link: '/简介/data_type' },
+          { text: 'What is Webis?', link: '/简介/what_is_webis' },
+          { text: 'Performance Evaluation', link: '/简介/performance' },
+          { text: 'Supported Data Types', link: '/简介/data_type' },
         ]
       },
       {
-        text: '安装',
+        text: 'Install',
         items: [
-          { text: '安装', link: '/安装/install' },
+          { text: 'Install', link: '/安装/install' },
         ]
       },
       {
-        text: '使用',
+        text: 'Usage',
         items: [
-          { text: '快速开始', link: '/使用/quickstart' },
+          { text: 'Quickstart', link: '/使用/quickstart' },
         ]
       },
       {
-        text: '更多',
+        text: 'More·',
         items: [
-          { text: '疑难解答', link: '/更多/Troubleshooting' },
-          { text: '性能优化', link: '/更多/Optimize' },
-          { text: '开发背景', link: '/更多/background' },
-          { text: '多模态数据处理工具', link: '/更多/tool' },
+          { text: 'Troubleshooting', link: '/更多/troubleshooting' },
+          { text: 'Performance Optimization', link: '/更多/optimization' },
+          { text: 'Development Background', link: '/更多/background' },
+          { text: 'Multimodal Data Processing Tools', link: '/更多/tool' },
         ]
       }
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/TheBinKing/Webis.git' }
+      { icon: 'github', link: 'https://anonymous.4open.science/r/Webis-17E3/' }
     ],
     footer: {
-      copyright: "版权所有 © 2025-2026 Webis开发小组",
+      copyright: "Copyright © 2025-2026 Webis Development Team",
     },
   }
 })

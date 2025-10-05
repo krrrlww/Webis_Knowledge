@@ -1,36 +1,36 @@
-# Webis 性能评估
+# Webis Performance Evaluation
 
-Webis 在多模态数据提取中展现出**高效、稳定**的性能，特别适合快速提取结构化数据。其主要优势在于速度快、依赖少、易于集成，同时能够较好地过滤广告、导航栏等噪声。本文对 Webis 的性能特点进行更细化的说明，并与常见的几种网页数据提取工具进行横向对比。
+Webis demonstrates **efficient and stable** performance in multimodal data extraction, particularly suitable for quickly extracting structured data. Its main advantages are fast speed, few dependencies, easy integration, and good filtering of noise such as advertisements and navigation bars. This article provides a more detailed explanation of Webis's performance characteristics and compares it horizontally with several common web data extraction tools.
 
-## 1. 性能特点
+## 1. Performance Characteristics
 
-- **处理速度**  
-  Webis 单页提取通常在数百毫秒内完成，批量处理可保持高吞吐量。适合中小规模数据抓取和实时需求场景。
+- **Processing Speed**
+  Webis typically completes single-page extraction within hundreds of milliseconds and maintains high throughput for batch processing. Suitable for small to medium-scale data crawling and real-time requirement scenarios.
 
-- **过滤能力**  
-  能够有效去除常见的网页噪声（如广告、导航、侧边栏），输出内容干净，支持 JSON 或纯文本格式。
+- **Filtering Capability**
+  Can effectively remove common webpage noise (such as advertisements, navigation, sidebars), output clean content, and support JSON or plain text formats.
 
-- **适配性**  
-  - 在 **静态 HTML 页面** 上表现稳定，错误率低，对多种网页结构有良好适应性。  
-  - 对于 **JavaScript 渲染的动态页面**，需要结合外部工具（如无头浏览器）以获得更好效果。
+- **Adaptability**
+  - Performs stably on **static HTML pages** with low error rates and good adaptability to various webpage structures.
+  - For **JavaScript-rendered dynamic pages**, external tools (such as headless browsers) need to be combined for better results.
 
-- **轻量级设计**  
-  依赖最小化，部署简单，能够快速集成进已有的数据管道，适合快速原型开发。
+- **Lightweight Design**
+  Minimizes dependencies, simplifies deployment, can be quickly integrated into existing data pipelines, and is suitable for rapid prototyping.
 
-- **适用场景**  
-  适合中小规模抓取任务、快速验证和轻量部署场景；在需要处理复杂动态网页的大规模任务中，还需配合其他工具。
+- **Application Scenarios**
+  Suitable for small to medium-scale crawling tasks, rapid verification, and lightweight deployment scenarios; for large-scale tasks requiring complex dynamic webpage processing, it still needs to be combined with other tools.
 
-## 2. 工具对比
+## 2. Tool Comparison
 
-下表对比了 Webis 与几种常见网页正文提取工具的主要特征：
+The following table compares the main features of Webis with several common webpage content extraction tools:
 
-| 工具        | 提取精度           | 处理速度     | 动态页面支持   | 易用性 / 配置    | 适用场景                   |
-| ----------- | ------------------ | ------------ | -------------- | ---------------- | -------------------------- |
-| **Webis**   | 高（静态页面可靠） | 快（毫秒级） | 需结合外部工具 | 高（依赖少）     | 中小规模数据抓取，快速原型 |
-| Trafilatura | 高，结构保留好     | 中等         | 较弱           | 中等（依赖较多） | 复杂页面正文提取，研究场景 |
-| Goose3      | 中等（新闻类较好） | 慢           | 弱             | 中等             | 新闻类页面提取             |
-| Newspaper3k | 中等（元数据丰富） | 较慢         | 弱             | 简单易用         | 新闻与博客类内容提取       |
+| Tool        | Extraction Precision          | Processing Speed | Dynamic Page Support | Usability / Configuration | Application Scenarios               |
+| ----------- | ----------------------------- | ---------------- | -------------------- | ------------------------- | ----------------------------------- |
+| **Webis**   | High (reliable for static pages) | Fast (millisecond level) | Requires external tools | High (few dependencies)   | Small to medium-scale data crawling, rapid prototyping |
+| Trafilatura | High, good structure retention | Medium           | Weak                 | Medium (more dependencies) | Complex page content extraction, research scenarios |
+| Goose3      | Medium (better for news)      | Slow             | Weak                 | Medium                    | News page extraction                |
+| Newspaper3k | Medium (rich metadata)        | Slower           | Weak                 | Simple and easy to use     | News and blog content extraction    |
 
-## 3. 总结
+## 3. Summary
 
-总体而言，Webis 在性能与易用性之间取得了良好平衡。它在静态页面的速度与精度方面具有竞争力，适合需要快速部署和中小规模数据提取的任务。与 Trafilatura 等工具相比，Webis 的优势在于轻量和快速，但在动态渲染页面处理上仍存在不足。未来若结合渲染支持与更强的语义模型，Webis 的应用场景将进一步扩展。
+Overall, Webis achieves a good balance between performance and usability. It is competitive in terms of speed and precision for static pages and is suitable for tasks requiring rapid deployment and small to medium-scale data extraction. Compared with tools like Trafilatura, Webis's advantages lie in its lightweight nature and speed, but it still has limitations in dynamic rendering page processing. In the future, if combined with rendering support and stronger semantic models, Webis's application scenarios will be further expanded.

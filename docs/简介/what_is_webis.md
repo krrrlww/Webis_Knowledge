@@ -1,19 +1,19 @@
-# Webis 是什么
+# What is Webis
 
 ::: info
-Webis 是一款高效、轻量级的**多模态数据提取工具**，专为开发者设计，用于从网页及其他文档中提取结构化数据。它以简洁性和模块化为设计核心，不仅支持文章正文、标题、元数据的抽取，还扩展到 PDF、DOC、图片等多模态内容。Webis 提供直观的 API 和命令行接口（CLI），满足多样化的数据处理场景。
+Webis is an efficient, lightweight **multimodal data extraction tool** designed for developers to extract structured data from webpages and other documents. With simplicity and modularity as its core design principles, it supports the extraction of article content, titles, metadata, and extends to multimodal content such as PDF, DOC, and images. Webis provides intuitive API and Command Line Interface (CLI) to meet diverse data processing scenarios.
 :::
 
-## 核心功能
+## Core Features
 
-Webis 通过解析 HTML 文档与其他文件格式，过滤掉广告、导航栏和无关元素，输出干净的结构化内容，支持 JSON 或纯文本格式。其架构适用于数据分析、内容聚合、网络爬虫和多模态数据管道。基于 Python 开发，Webis 兼容现代开发流程，依赖项极少，确保高性能和便携性。
+Webis parses HTML documents and other file formats, filters out advertisements, navigation bars, and irrelevant elements, and outputs clean structured content in JSON or plain text formats. Its architecture is suitable for data analysis, content aggregation, web crawling, and multimodal data pipelines. Developed based on Python, Webis is compatible with modern development processes and has minimal dependencies, ensuring high performance and portability.
 
-核心功能包括：
+Core features include:
 
-- **多模态支持**：除网页外，还支持 PDF、Word 文档、图片文字识别（OCR）等内容提取。  
-- **程序化访问**：提供简洁 API，便于快速集成。  
-- **命令行支持**：CLI 工具可直接完成批量处理。  
-- **灵活配置**：可定制提取规则，以适应不同页面或文档结构。  
-- **跨格式输出**：支持 JSON、纯文本等多种输出形式。  
+- **Multimodal Support**: In addition to webpages, it supports PDF, Word documents, image text recognition (OCR), and other content extraction.
+- **Programmatic Access**: Provides a concise API for quick integration.
+- **Command Line Support**: CLI tools can directly complete batch processing.
+- **Flexible Configuration**: Customizable extraction rules to adapt to different page or document structures.
+- **Cross-format Output**: Supports various output formats such as JSON and plain text.
 
-无论是处理静态网页，还是跨模态文件（文档、图片等），Webis 都能高效完成任务。
+Whether processing static webpages or cross-modal files (documents, images, etc.), Webis can efficiently complete the task.

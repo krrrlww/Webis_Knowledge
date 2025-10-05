@@ -1,18 +1,17 @@
-# 疑难解答指南
+# Troubleshooting Guide
 
-本文列出了使用 Webis 时常见的错误及解决方法。
+This article lists common errors and solutions when using Webis.
 
+## Cannot Access API: 401 Unauthorized
 
-## 无法访问 API：401 Unauthorized
+**Reasons**:
 
-**原因**：
+- No valid API Key provided, or server has authentication enabled.
 
-- 没有提供有效的 API Key，或服务器开启了认证。
+**Solutions**:
 
-**解决方法**：
-
-- 检查项目根目录下的 ``api_keys.json`` 并复制一个有效的 key。
-- 调用 API 时添加 ``api_key`` 参数，例如：
+- Check `api_keys.json` in the project root directory and copy a valid key.
+- Add `api_key` parameter when calling the API, for example:
 
 ```bash
 curl -X POST http://localhost:8000/generate   -H "Content-Type: application/json"   -d '{"prompt": "hello", "api_key": "your-key"}'
@@ -20,21 +19,21 @@ curl -X POST http://localhost:8000/generate   -H "Content-Type: application/json
 
 ---
 
-## 模型加载失败：GPU 显存不足
+## Model Loading Failed: Insufficient GPU Memory
 
-**报错**：
+**Error**:
 
 ```text
 ValueError: Free memory on device (...) is less than desired GPU memory utilization (...)
 ```
 
-**原因**：
+**Reason**:
 
-- 剩余 GPU 显存小于模型所需的显存限制。
+- Remaining GPU memory is less than the memory limit required by the model.
 
-**解决方法**：
+**Solution**:
 
-- 设置更低的 ``GPU_MEMORY_UTILIZATION``：
+- Set lower `GPU_MEMORY_UTILIZATION`:
 
 ```bash
 export GPU_MEMORY_UTILIZATION=0.6
@@ -42,19 +41,19 @@ export GPU_MEMORY_UTILIZATION=0.6
 
 ---
 
-## 找不到 libcudart.so 错误
+## Cannot Find libcudart.so Error
 
 ```text
 ImportError: libcudart.so.11.0: cannot open shared object file: No such file or directory
 ```
 
-**原因**：
+**Reason**:
 
-- CUDA 动态库未安装或版本不兼容。
+- CUDA dynamic library not installed or version incompatible.
 
-**解决方法**：
+**Solution**:
 
-- 通过 conda 安装带对应 CUDA 的 PyTorch：
+- Install PyTorch with corresponding CUDA via conda:
 
 ```bash
 conda install pytorch-cuda=12.1 -c pytorch -c nvidia
@@ -62,17 +61,17 @@ conda install pytorch-cuda=12.1 -c pytorch -c nvidia
 
 ---
 
-## 构建失败：未找到 C 编译器
+## Build Failure: C Compiler Not Found
 
 ```text
 RuntimeError: Failed to find C compiler.
 ```
 
-**原因**：
+**Reason**:
 
-- 缺少 ``gcc`` 等编译工具，Triton 在编译模型内核时失败。
+- Missing compilation tools like `gcc`, Triton failed when compiling model kernels.
 
-**解决方法**：
+**Solution**:
 
 ```bash
 sudo apt update
@@ -81,23 +80,23 @@ sudo apt install build-essential
 
 ---
 
-## HuggingFace 模型下载失败（WSL 网络问题）
+## HuggingFace Model Download Failure (WSL Network Issue)
 
-**现象**：
+**Symptoms**:
 
-- 模型下载卡住或提示 `ConnectionError`, `Failed to establish new connection`
+- Model download stuck or prompts `ConnectionError`, `Failed to establish new connection`
 
-**解决方法**：
+**Solution**:
 
-1. 在 Windows CMD 中运行：
+1. Run in Windows CMD:
 
 ```cmd
 ipconfig
 ```
 
-2. 找到机器的 IPv4 地址，例如 `192.168.0.123`
+2. Find the machine's IPv4 address, for example `192.168.0.123`
 
-3. 在 WSL 中设置代理：
+3. Set proxy in WSL:
 
 ```bash
 export http_proxy=http://192.168.0.123:7890
@@ -106,17 +105,17 @@ export https_proxy=http://192.168.0.123:7890
 
 ---
 
-## 无模型输出 / API 返回空字符串
+## No Model Output / API Returns Empty String
 
-**可能原因**：
+**Possible Reasons**:
 
-- ``prompt`` 内容不完整或缺乏上下文。
-- ``max_tokens`` 设置过低，导致生成被截断。
+- `prompt` content is incomplete or lacks context.
+- `max_tokens` set too low, causing generation to be truncated.
 
-**建议**：
+**Suggestions**:
 
-- 适当增加 ``max_tokens`` 参数（如 256 → 512）
-- 使用清晰的 prompt，例如：
+- Appropriately increase the `max_tokens` parameter (e.g., 256 → 512)
+- Use clear prompts, for example:
 
 ```text
 Please extract contact name and phone number from the following HTML: <html>...</html>
@@ -124,29 +123,29 @@ Please extract contact name and phone number from the following HTML: <html>...<
 
 ---
 
-## 包管理器锁错误（dpkg/apt）
+## Package Manager Lock Error (dpkg/apt)
 
-**报错**：
+**Error**:
 
 ```text
 Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process
 ```
 
-**原因**：
+**Reason**:
 
-- 另一个软件包管理进程（apt, apt-get, dpkg 或系统更新）正在运行  
-- 上一次安装被中断，遗留了锁文件
+- Another package management process (apt, apt-get, dpkg, or system update) is running
+- Previous installation was interrupted, leaving lock files
 
-**解决方法**：
+**Solution**:
 
-1. 如果有合法更新在运行，等待完成  
-2. 如果没有其他更新，检查哪个进程占用锁：
+1. If a legitimate update is running, wait for it to complete
+2. If no other updates are present, check which process is holding the lock:
 
 ```bash
 ps aux | grep -i apt
 ```
 
-3. 如有必要，删除锁文件（谨慎使用）：
+3. If necessary, delete lock files (use with caution):
 
 ```bash
 sudo rm /var/lib/apt/lists/lock
