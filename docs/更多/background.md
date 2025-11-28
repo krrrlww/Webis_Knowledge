@@ -1,43 +1,43 @@
-# Development Background of Webis
+# Webis 开发背景
 
-+ The development background of Webis is the **rapid rise of large language models (LLMs)**, the lowered threshold for local model deployment, and the increasing demand for large language models with personalized, specialized functions.
-+ Although models like GPT-4 and LLaMA perform excellently, many teams and researchers still face the challenges of **models not being specialized enough and having limited data available for training** when running on local or private servers.
-+ Webis is committed to solving these problems by providing a **developer-friendly framework** for extracting and cleaning data from webpages (HTML) and various formats (DOC, PDF, etc.), offering high-quality input for LLM training.
++ Webis 的开发背景是**大语言模型（LLM）的快速崛起**、本地模型部署门槛的降低，以及对具有个性化、专业化功能的大语言模型需求的日益增长。
++ 尽管 GPT-4 和 LLaMA 等模型表现出色，但许多团队和研究人员在本地或私有服务器上运行时，仍然面临**模型不够专业化、训练数据有限**的挑战。
++ Webis 致力于解决这些问题，通过提供**开发者友好的框架**来提取和清洗来自网页（HTML）以及各种格式（DOC、PDF 等）的数据，为 LLM 训练提供高质量输入。
 
-## Industry Background
+## 行业背景
 
-- **AI Application Explosion**
-  The popularity of generative AI such as ChatGPT has promoted its wide application in education, medical care, scientific research, and industry.
-  However, general models often fail to meet user expectations in professional fields (such as law, medicine, scientific papers, etc.), creating an urgent need for **domain-specific training data**.
+- **AI 应用爆发**
+  ChatGPT 等生成式 AI 的流行促进了其在教育、医疗、科研和工业领域的广泛应用。
+  然而，通用模型往往无法满足专业领域（如法律、医学、科学论文等）的用户期望，产生了对**领域特定训练数据**的迫切需求。
 
-- **High-Quality Data Scarcity**
-  The effectiveness of LLMs highly depends on data, but currently, high-quality, structured data is often difficult to obtain.
-  Developers and researchers frequently spend a lot of ineffective time on **web crawling, format conversion, and data cleaning** rather than focusing on model optimization.
+- **高质量数据稀缺**
+  LLM 的有效性高度依赖于数据，但目前高质量、结构化的数据往往难以获得。
+  开发者和研究人员经常花费大量无效时间在**网页爬取、格式转换和数据清洗**上，而不是专注于模型优化。
 
-- **Open Source and Customization Needs**
-  Commercial datasets are expensive and carry copyright and privacy risks. The open-source community and enterprises hope to use tools to **build controllable datasets from the open web and own documents**, constructing a truly "belonging to oneself" LLM.
+- **开源和定制化需求**
+  商业数据集价格昂贵，且存在版权和隐私风险。开源社区和企业希望使用工具来**从开放网络和自有文档构建可控的数据集**，构建真正"属于自己的" LLM。
 
-## Webis's Motivation
+## Webis 的动机
 
-1. **Lower Data Preparation Threshold**
-   - One-click extraction of webpages and multiple document formats
-   - Automatic cleaning of noisy data, conversion to unified format
+1. **降低数据准备门槛**
+   - 一键提取网页和多种文档格式
+   - 自动清洗噪声数据，转换为统一格式
 
-2. **Facilitate Personalized LLM Training**
-   - Provide dedicated training corpus for specific domain models
-   - Allow researchers and enterprises to quickly build customized datasets
+2. **促进个性化 LLM 训练**
+   - 为特定领域模型提供专用训练语料
+   - 允许研究人员和企业快速构建定制数据集
 
-3. **Developer-Friendly**
-   - Provide concise API and command-line tools
-   - Combine troubleshooting and performance optimization documentation to reduce learning difficulty
+3. **开发者友好**
+   - 提供简洁的 API 和命令行工具
+   - 结合故障排除和性能优化文档，降低学习难度
 
-## Vision
+## 愿景
 
-Webis is not just a data processing tool; it aspires to be **a bridge connecting real-world data and large language model training**.
-By simplifying data extraction and cleaning processes, Webis can help:
+Webis 不仅仅是一个多模态数据处理工具；它渴望成为**连接现实世界数据和大语言模型训练的桥梁**。
+通过简化数据提取和清洗过程，Webis 可以帮助：
 
-- **Students and researchers**: Quickly collect scientific research corpus and explore AI applications in academic fields
-- **Startups and enterprises**: Build private large models that meet their business needs
-- **Open-source community**: Share high-quality data processing solutions and promote the prosperity of the AI ecosystem
+- **学生和研究人员**：快速收集科研语料，探索 AI 在学术领域的应用
+- **初创公司和企业**：构建满足其业务需求的私有大模型
+- **开源社区**：分享高质量的数据处理解决方案，促进 AI 生态系统的繁荣
 
-Ultimate goal: To make **high-quality training data acquisition simpler, more efficient, and more reliable**.
+终极目标：让**高质量训练数据的获取更简单、更高效、更可靠**。

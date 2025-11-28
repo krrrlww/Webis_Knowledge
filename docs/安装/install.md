@@ -1,42 +1,42 @@
-# Webis Installation Steps
+# Webis 安装步骤
 
-## Prerequisites
+## 前置要求
 - Python 3.9+
-- Conda environment or uv environment
+- Conda 环境或 uv 环境
 
-## Environment Configuration
+## 环境配置
 
-### Method 1: Automatic Configuration Script (Recommended)
+### 方法一：自动配置脚本（推荐）
 ```bash
-# Run the automatic configuration script (for Conda environment)
+# 运行自动配置脚本（适用于 Conda 环境）
 bash setup/conda_setup.sh
 
-# If using uv environment
+# 如果使用 uv 环境
 bash setup/uv_setup.sh
 ```
 
-### Method 2: Manual Configuration
+### 方法二：手动配置
 ```bash
-# Create and activate a Conda environment
+# 创建并激活 Conda 环境
 conda create -n webis python=3.9 -y
 conda activate webis
 
-# Install dependency packages
+# 安装依赖包
 pip install -r setup/requirements.txt
 ```
 
-### Method 3: Using Homebrew (macOS)
+### 方法三：使用 Homebrew（macOS）
 ```bash
-# Install Homebrew
+# 安装 Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# Install Python
+# 安装 Python
 brew install python
 
-# Verify installation
+# 验证安装
 python3 --version
 pip3 --version
 
-# Install dependencies
+# 安装依赖
 pip install -r setup/requirements.txt
 ```

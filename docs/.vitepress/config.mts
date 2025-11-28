@@ -28,7 +28,6 @@ export default defineConfig({
         text: 'Introduction',
         items: [
           { text: 'What is Webis?', link: '/简介/what_is_webis' },
-          { text: 'Supported Data Types', link: '/简介/data_type' },
         ]
       },
       {
@@ -44,10 +43,9 @@ export default defineConfig({
         ]
       },
       {
-        text: 'More·',
+        text: 'More',
         items: [
           { text: 'Troubleshooting', link: '/更多/troubleshooting' },
-          { text: 'Performance Optimization', link: '/更多/optimization' },
           { text: 'Development Background', link: '/更多/background' },
           { text: 'Multimodal Data Processing Tools', link: '/更多/tool' },
         ]

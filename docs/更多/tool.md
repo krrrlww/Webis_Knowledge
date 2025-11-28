@@ -1,36 +1,36 @@
-# Introduction to Webis Multimodal Data Cleaning Tools
+# Webis 多模态数据清洗工具介绍
 
-Webis is an efficient data cleaning framework originally focusing on web content extraction, now extended to a comprehensive multimodal data cleaning system supporting PDF, images (PIC), and documents (DOC/TXT/MD) through strategic integration with advanced tools including pdfplumber, PyMuPDF, Tesseract, EasyOCR, LangChain, and LlamaIndex. This framework delivers high-quality, structured data inputs tailored for large language models (LLMs), with wide-ranging applications in data analysis, content aggregation, knowledge extraction, and multimodal data pipeline construction. By leveraging the complementary strengths of each integrated tool, Webis addresses the challenges of diverse data formats while ensuring consistency, accuracy, and efficiency in data cleaning. This document details the technical background of core multimodal tools, their unique capabilities, and integration methods within Webis, highlighting key technical values and implementation specifics.
+Webis 是一个高效的数据清洗框架，最初专注于网页内容提取，现已扩展为支持 PDF、图片（PIC）和文档（DOC/TXT/MD）的全面多模态数据清洗系统，通过战略性地集成包括 pdfplumber、PyMuPDF、Tesseract、EasyOCR、LangChain 和 LlamaIndex 在内的先进工具。该框架为大语言模型（LLM）提供高质量、结构化的数据输入，在数据分析、内容聚合、知识提取和多模态数据管道构建方面具有广泛的应用。通过利用每个集成工具的互补优势，Webis 解决了多样化数据格式的挑战，同时确保数据清洗的一致性、准确性和效率。本文档详细介绍了核心多模态工具的技术背景、独特能力以及在 Webis 中的集成方法，突出了关键技术价值和实现细节。
 
-## Multimodal Tool Introduction
+## 多模态工具介绍
 
-### 1. pdfplumber + PyMuPDF (Dual-Engine PDF Processing)
+### 1. pdfplumber + PyMuPDF（双引擎 PDF 处理）
 
-PyMuPDF is a lightweight, high-performance Python library built on the MuPDF engine, first introduced in 2011 and widely acclaimed for fast PDF parsing and rendering. It excels at extracting text, basic tables, images, and metadata (e.g., author, page count, creation date) while preserving the original document structure (such as page order, paragraph hierarchy, and layout). In Webis, PyMuPDF is responsible for efficient processing of large PDF files—including academic papers, technical reports, and bulk document batches—maintaining low memory usage and rapid throughput even with extensive content.
+PyMuPDF 是一个基于 MuPDF 引擎构建的轻量级、高性能 Python 库，于 2011 年首次推出，因快速 PDF 解析和渲染而广受赞誉。它擅长提取文本、基本表格、图片和元数据（如作者、页数、创建日期），同时保留原始文档结构（如页面顺序、段落层次和布局）。在 Webis 中，PyMuPDF 负责高效处理大型 PDF 文件——包括学术论文、技术报告和批量文档——即使在内容广泛的情况下也能保持低内存使用和快速吞吐量。
 
-Complementing PyMuPDF, pdfplumber is integrated as a specialized tool for high-precision complex table extraction. It excels at identifying merged cells, nested tables, and fine-grained table formatting (e.g., borders, column widths, and cell alignment), ensuring the integrity and accuracy of tabular data critical for financial statements, data-intensive industry reports, and scientific datasets. The dual-engine architecture combines PyMuPDF’s speed with pdfplumber’s table extraction precision, enabling Webis to handle both simple and intricate PDF layouts reliably. The structured output (e.g., JSON) preserves document hierarchy and tabular integrity, providing precise, machine-readable content support for LLMs and downstream analysis.
+作为 PyMuPDF 的补充，pdfplumber 被集成为高精度复杂表格提取的专用工具。它擅长识别合并单元格、嵌套表格和细粒度表格格式（如边框、列宽和单元格对齐），确保对财务报表、数据密集型行业报告和科学数据集至关重要的表格数据的完整性和准确性。双引擎架构结合了 PyMuPDF 的速度和 pdfplumber 的表格提取精度，使 Webis 能够可靠地处理简单和复杂的 PDF 布局。结构化输出（如 JSON）保留了文档层次结构和表格完整性，为 LLM 和下游分析提供精确的、机器可读的内容支持。
 
-### 2. Tesseract + EasyOCR (Dual-OCR Image Processing)
+### 2. Tesseract + EasyOCR（双 OCR 图片处理）
 
-Tesseract, an open-source OCR engine initially developed by HP in 1985 and now maintained by Google, stands as an industry standard for image text extraction. Supporting over 100 languages, it introduced LSTM neural networks in version 4.0, significantly enhancing recognition accuracy for standard text while demonstrating robustness against low-quality images and complex backgrounds. In Webis, Tesseract forms the foundation for multilingual text extraction from images.
+Tesseract 是一个开源 OCR 引擎，最初由 HP 于 1985 年开发，现由 Google 维护，是图像文本提取的行业标准。支持 100 多种语言，在 4.0 版本中引入了 LSTM 神经网络，显著提高了标准文本的识别准确性，同时对低质量图像和复杂背景表现出强大的鲁棒性。在 Webis 中，Tesseract 构成了从图像进行多语言文本提取的基础。
 
-To address more challenging scenarios, Webis integrates EasyOCR—a modern OCR tool optimized for complex use cases such as low-resolution images, handwritten text overlays, skewed text, and multilingual mixed content. Together, these two engines cover a wide range of image formats, including `.png`, `.jpg`, `.jpeg`, `.bmp`, and `.tiff`, enabling text extraction from scanned documents, screenshots, printed text images, and digital photos containing text. Both engines are specially optimized for Chinese character recognition (supporting simplified and traditional Chinese) as well as mixed Chinese-English text, ensuring reliable performance in Chinese-language scenarios. The extracted text is output in structured formats, seamlessly integrating with LLM workflows and content aggregation tasks.
+为了解决更具挑战性的场景，Webis 集成了 EasyOCR——一个针对复杂用例优化的现代 OCR 工具，如低分辨率图像、手写文本叠加、倾斜文本和多语言混合内容。这两个引擎共同覆盖了广泛的图像格式，包括 `.png`、`.jpg`、`.jpeg`、`.bmp` 和 `.tiff`，能够从扫描文档、截图、打印文本图像和包含文本的数字照片中提取文本。两个引擎都特别针对中文字符识别（支持简体和繁体中文）以及中英文混合文本进行了优化，确保在中文场景中的可靠性能。提取的文本以结构化格式输出，与 LLM 工作流和内容聚合任务无缝集成。
 
-### 3. LangChain + LlamaIndex (Intelligent Document Processing)
+### 3. LangChain + LlamaIndex（智能文档处理）
 
-LlamaIndex, an open-source framework developed in 2022 by a former Uber engineer, is specifically designed to enhance LLM interactions with structured and unstructured documents. It specializes in document indexing, complex structure parsing, and context preservation, excelling at identifying and retaining critical elements such as headings, footers, footnotes, nested lists, and tables of contents in `.docx`, `.txt`, and `.md` files. In Webis, LlamaIndex ensures the hierarchical integrity of original documents—whether business contracts, research reports, or technical manuals—preserving contextual relationships that are vital for meaningful data extraction.
+LlamaIndex 是一个由前 Uber 工程师于 2022 年开发的开源框架，专门设计用于增强 LLM 与结构化和非结构化文档的交互。它专门用于文档索引、复杂结构解析和上下文保留，擅长识别和保留关键元素，如 `.docx`、`.txt` 和 `.md` 文件中的标题、页脚、脚注、嵌套列表和目录。在 Webis 中，LlamaIndex 确保原始文档的层次完整性——无论是商业合同、研究报告还是技术手册——保留对有意义的数据提取至关重要的上下文关系。
 
-LangChain complements LlamaIndex by adding advanced natural language processing (NLP) capabilities to the document processing pipeline. It enables semantic chunking (splitting content by logical meaning rather than arbitrary character counts), key entity extraction (e.g., names, dates, organizations, and technical terms), and context-aware summarization. This integration allows Webis to go beyond basic text extraction: it can generate structured outputs such as key point summaries, entity-rich data frames, or semantic metadata, making the cleaned data more actionable for LLM training, inference, or knowledge base construction. Together, LangChain and LlamaIndex enhance the intelligence and flexibility of document cleaning, adapting to diverse text-intensive scenarios that require both structural precision and deep semantic understanding.
+LangChain 通过向文档处理管道添加高级自然语言处理（NLP）功能来补充 LlamaIndex。它支持语义分块（按逻辑意义而非任意字符数分割内容）、关键实体提取（如姓名、日期、组织和技术术语）和上下文感知摘要。这种集成使 Webis 能够超越基本文本提取：它可以生成结构化输出，如关键点摘要、实体丰富的数据框架或语义元数据，使清洗后的数据对 LLM 训练、推理或知识库构建更具可操作性。LangChain 和 LlamaIndex 共同增强了文档清洗的智能性和灵活性，适应需要结构精度和深度语义理解的各种文本密集型场景。
 
-## Integration Methods
+## 集成方法
 
-Webis implements integration of multimodal tools through the `UnifiedFileProcessor` class in `tools/file_processor.py`, specifically including:
+Webis 通过 `tools/file_processor.py` 中的 `UnifiedFileProcessor` 类实现多模态工具的集成，具体包括：
 
-1. **Automatic Type Recognition**: According to file extensions (such as `.pdf`, `.png`, `.jpg`, `.jpeg`, `.bmp`, `.tiff`, `.docx`, `.txt`, `.md`), automatically call the corresponding dual-engine or integrated processor.
-2. **Dedicated Processors**: In the `tools/processors/` directory, specialized scripts for pdfplumber, PyMuPDF, Tesseract, EasyOCR, LangChain, and LlamaIndex (such as `LlamaIndex-clean.py`) respectively handle PDF, image, and document files, uniformly outputting results as JSON or plain text.
-3. **Unified Interface**: Provides API (such as `extract_text_from_file` for single files and `batch_extract_text` for bulk processing) and CLI interfaces, simplifying developer operations and supporting seamless integration into existing workflows.
-4. **Dependency Management**: Ensures tool compatibility and stable operation through `setup/requirements.txt`, with full support for Chinese content processing and efficient error handling (including detailed error logging and result validation).
+1. **自动类型识别**：根据文件扩展名（如 `.pdf`、`.png`、`.jpg`、`.jpeg`、`.bmp`、`.tiff`、`.docx`、`.txt`、`.md`），自动调用相应的双引擎或集成处理器。
+2. **专用处理器**：在 `tools/processors/` 目录中，pdfplumber、PyMuPDF、Tesseract、EasyOCR、LangChain 和 LlamaIndex 的专用脚本（如 `LlamaIndex-clean.py`）分别处理 PDF、图片和文档文件，统一输出 JSON 或纯文本格式的结果。
+3. **统一接口**：提供 API（如单文件的 `extract_text_from_file` 和批量处理的 `batch_extract_text`）和 CLI 接口，简化开发者操作，支持无缝集成到现有工作流中。
+4. **依赖管理**：通过 `setup/requirements.txt` 确保工具兼容性和稳定运行，完全支持中文内容处理和高效错误处理（包括详细的错误日志和结果验证）。
 
-## Future Outlook
+## 未来展望
 
-Webis plans to expand support for more modalities (such as video and audio), further optimize cleaning performance and multilingual processing capabilities. Feedback is welcome through GitHub Issues or Pull Requests to jointly improve this multimodal data cleaning framework.
+Webis 计划扩展对更多模态的支持（如视频和音频），进一步优化清洗性能和多语言处理能力。欢迎通过 GitHub Issues 或 Pull Requests 提供反馈，共同改进这个多模态数据清洗框架。

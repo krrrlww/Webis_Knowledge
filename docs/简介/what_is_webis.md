@@ -1,40 +1,40 @@
-# What is Webis
+# 什么是 Webis
 
 ::: info
-Webis is an efficient, lightweight **multimodal data cleaning and extraction tool** designed for developers to process and extract structured data from diverse file formats. With simplicity and modularity as its core design principles, it supports automatic file type recognition and integrates specialized processors for webpages, documents, PDFs, images, and more. Webis provides intuitive APIs and a Command Line Interface (CLI) to meet diverse data processing scenarios, enabling seamless integration into data analysis, content aggregation, and multimodal data pipelines.
+Webis 是一个高效、轻量级的**多模态数据提取框架**，专为开发者设计，用于处理和提取各种文件格式的结构化数据。以简洁性和模块化为核心设计原则，它支持从网络爬取源数据之后自动文件类型识别，调用不同的工具进行数据清洗，最终形成结构化输出数据。Webis 提供直观的 API 和命令行界面（CLI）以满足多样化的数据处理场景，是一条从网络数据爬取、多模态清洗到专题知识库构建的全链路高效流水线。
 :::
 
-## Core Features
+## 核心特性
 
-Webis automatically identifies file types and dispatches them to dedicated processing modules, filtering out noise and irrelevant information to output clean, structured content in JSON or plain text formats. Built with Python, it maintains minimal dependencies while ensuring high performance and portability across modern development environments.
+Webis 自动识别文件类型并将其分派到专用处理模块，过滤掉噪声和无关信息，以JSON或纯文本格式输出干净、结构化的内容。使用 Python 构建，它保持最少的依赖关系，同时确保在现代开发环境中的高性能和可移植性。
 
-### Key Capabilities
+### 主要能力
 
-- **Multimodal Support**: Handles diverse formats including HTML webpages, PDF documents, Word files (.docx), plain text (.txt), Markdown (.md), and images (.png, .jpg, .jpeg, .bmp, .tiff) with OCR capabilities.
+- **多模态支持**：处理包括 HTML 网页、PDF 文档、Word 文件（.docx）、纯文本（.txt）、Markdown（.md）和图片（.png、.jpg、.jpeg、.bmp、.tiff）在内的多种格式数据。
   
-- **Unified Interface**: Provides consistent API endpoints for all file types, simplifying integration into existing workflows. Whether using individual processors or the unified handler, the output format remains consistent.
+- **统一接口**：为所有文件类型提供一致的接口，简化与现有工作流的集成。无论使用独立处理器还是统一处理器，输出格式都保持一致。
 
-- **Flexible Access**: 
-  - Programmatic access via concise APIs for seamless integration into applications
-  - Command-line tools for batch processing and quick operations
-  - Convenience functions for single-file and bulk processing tasks
+- **灵活访问**：
+  - 通过简洁的 API 进行编程访问，无缝集成到应用程序中
+  - 命令行工具用于批量处理和快速操作
+  - 便捷函数用于单文件和批量处理任务
 
-- **Intelligent Processing**: 
-  - Webis_HTML (a proprietary component) uses AI-powered extraction for web content
-  - OCR for image text recognition with support for Chinese characters
-  - Structured output preserving document structure (e.g., page numbers in PDFs)
+- **智能处理**：
+  - Webis_HTML（专有组件）使用 AI 驱动的提取来处理网页内容
+  - OCR 用于图像文本识别，支持中文字符
+  - 结构化输出保留文档结构（如 PDF 中的页码）
 
-- **Extensible Architecture**: Modular design allows easy addition of new file type processors, adapting to evolving data processing needs.
+- **可扩展架构**：模块化设计允许轻松添加新的文件类型处理器，适应不断发展的数据处理需求。
 
-- **Robust Error Handling**: Comprehensive error reporting and logging ensure reliability in production environments.
+- **强大的错误处理**：全面的错误报告和日志记录确保在生产环境中的可靠性。
 
-## Supported File Types
+## 支持的文件类型
 
-| Type       | Extensions                              | Processor    | Description                                          |
+| 类型       | 扩展名                              | 处理器    | 描述                                          |
 |------------|-----------------------------------------|--------------|------------------------------------------------------|
-| Documents  | `.txt`, `.md`, `.docx`                  | LangChain    | Direct text extraction with structure preservation    |
-| PDFs       | `.pdf`                                  | PyPDF        | Page-aware extraction with pagination information     |
-| Images     | `.png`, `.jpg`, `.jpeg`, `.bmp`, `.tiff`| EasyOCR      | Optical character recognition with multi-language support |
-| Webpages   | `.html`                                 | Webis_HTML   | AI-optimized extraction of valuable content from web pages |
+| 文档  | `.txt`、`.md`、`.docx`                  | LangChain    | 直接文本提取，保留结构    |
+| PDF       | `.pdf`                                  | PyPDF        | 页面感知提取，包含分页信息     |
+| 图片     | `.png`、`.jpg`、`.jpeg`、`.bmp`、`.tiff`| EasyOCR      | 光学字符识别，支持多语言 |
+| 网页   | `.html`                                 | Webis_HTML   | AI 优化的网页有价值内容提取 |
 
-Whether processing static web content, office documents, or image-based text, Webis delivers consistent, high-quality results through its specialized processing modules. Its adaptability makes it suitable for applications ranging from content aggregation to data mining and multimodal data pipeline construction.
+无论是处理静态网页内容、办公文档还是基于图像的文本，Webis 都通过其专用处理模块提供一致、高质量的结果。其适应性使其适用于从内容聚合到数据挖掘和多模态数据管道构建的各种应用。
