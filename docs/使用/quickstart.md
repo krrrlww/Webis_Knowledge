@@ -1,112 +1,182 @@
-# Webis Usage Guide
+# Webis Quick Start Guide
 
-Webis provides three usage methods: **API calling, GUI graphical interface, CLI command line**.
-::: tip
-Please start the model service and Web API service first before using (see below)
-:::
+## Overview
+Webis is a multimodal data cleaning tool that supports **documents, PDFs, images, HTML webpages**, and other data types. It can automatically identify file types, quickly call different tools to batch clean various files, and provide **structured output**. Currently, Webis has integrated four modal data processing tools, among which the **Webis_HTML** tool is an independently developed webpage data extraction tool that uses AI technology to automatically identify valuable information on webpages. Webis_HTML has also been uploaded to PyPi as a separate dependency package.
 
-## Quick Start Guide
 
-To get started with Webis quickly, follow these simple steps:
+## Basic Usage
 
+### Activate the Environment
 ```bash
-# 1. Create and activate Python environment
-conda create -n webis python=3.10 -y
 conda activate webis
-
-# 2. Install Webis
-pip install webis-llm
-
-# 3. Start model service (port 8000)
-python scripts/start_model_server.py
-
-# 4. Start Web API service (port 8002)
-python scripts/start_web_server.py
-
-# 5. Next, you can use Webis to perform extraction tasks via API, GUI, or CLI
 ```
 
-## API Method
+### Basic Operations
+```bash
+# Process a single file
+python process_file.py tools/data/pdf/example.pdf
 
-**Synchronous Mode (suitable for small files)**
+# Run the full demo
+python examples/demo.py
 
+# View supported file types
+python3 file_processor.py
+```
+
+## Interface Usage Examples
+
+### 1. Individual Processor Interfaces
+
+#### DocumentProcessor
 ```python
-# Submit HTML file processing request
-response = requests.post(
-    "http://localhost:8002/extract/process-html",
-    files=files,
-    data=data
-)
+from file_processor import DocumentProcessor
 
-# Download processing results
-response = requests.get(f"http://localhost:8002/tasks/{task_id}/download", stream=True)
+processor = DocumentProcessor()
+
+# Check if the file type is supported
+if processor.can_process("test.docx"):
+    # Extract text
+    result = processor.extract_text("test.docx")
+    if result["success"]:
+        print(result["text"])
+    else:
+        print(f"Error: {result['error']}")
 ```
 
-**Asynchronous Mode (suitable for large tasks)**
-
+#### PDFProcessor
 ```python
-# Submit asynchronous task
-response = requests.post(
-    "http://localhost:8002/extract/process-async",
-    files=files,
-    data=data
-)
+from file_processor import PDFProcessor
 
-# Query task status
-status = requests.get(f"http://localhost:8002/tasks/{async_task_id}")
+processor = PDFProcessor()
 
-# Download results
-download = requests.get(f"http://localhost:8002/tasks/{async_task_id}/download", stream=True)
+# Extract text from PDF
+result = processor.extract_text("document.pdf")
+if result["success"]:
+    print(result["text"])  # Includes page number information
 ```
 
-**Running Examples:**
+#### ImageProcessor (OCR)
+```python
+from file_processor import ImageProcessor
 
-```bash
-# Run basic example script
-python samples/api_usage.py
+processor = ImageProcessor()
 
-# Enable DeepSeek integration (requires API key)
-python samples/api_usage.py --use-deepseek --api-key YOUR_API_KEY_HERE
+# Perform OCR on the image
+result = processor.extract_text("image.png")
+if result["success"]:
+    print(result["text"])
 ```
 
-> Input file directory: `input_html/`
-> Output files:
-> 
-> * Synchronous → `{task_id}_results.zip`
-> * Asynchronous → `{async_task_id}_async_results.zip`
+#### HTMLProcessor
+```python
+from file_processor import HTMLProcessor
 
-## GUI Method
+processor = HTMLProcessor()
 
-Using Webis through a web browser:
-
-1. Start the Web API service (see step 4 of the quick guide).
-2. Open a browser and visit: `http://localhost:8002`
-3. Upload HTML files in the interface and click **Extract** to start processing
-4. Download the generated ZIP result file
-
-!!! tip "Recommendation"
-The GUI method is user-friendly and suitable for users who are not familiar with command line to quickly experience the functionality.
-
-## CLI Method
-
-**Basic Usage**
-
-```bash
-./samples/cli_usage.sh
+# Extract text from HTML
+result = processor.extract_text("example.html")
+if result["success"]:
+    print(result["text"])
 ```
 
-Results will be saved to the `output_basic/` directory.
+**API Key Configuration** (optional, for AI optimization features):
+- Environment variable: `export DEEPSEEK_API_KEY="your-key"` or `export LLM_PREDICTOR_API_KEY="your-key"`
+- In code: `HTMLProcessor(api_key="your-key")`
 
-**Common Commands:**
+> Note: To use the DeepSeek API for content filtering optimization, you need to configure the corresponding API key. Basic functions can be used normally without configuring an API key.
 
-```bash
-# View version
-$PROJECT_ROOT/bin/webis version
+### 2. Unified Processor Interface
+```python
+from file_processor import UnifiedFileProcessor
 
-# Check if API is available (requires API key)
-$PROJECT_ROOT/bin/webis check-api --api-key YOUR_API_KEY
+processor = UnifiedFileProcessor()
 
-# View help information
-$PROJECT_ROOT/bin/webis --help
-$PROJECT_ROOT/bin/webis extract --help
+# Automatically determine the file type and process it
+result = processor.extract_text("any_file.pdf")
+print(f"File Type: {result['file_type']}")
+print(f"Text Content: {result['text']}")
 ```
+
+### 3. Convenient Function Interfaces
+
+#### Single File Processing
+```python
+from file_processor import extract_text_from_file
+
+# Simplest usage
+result = extract_text_from_file("file.pdf")
+if result["success"]:
+    print(f"File Type: {result['file_type']}")
+    print(f"Text Length: {len(result['text'])}")
+    print(result["text"])
+```
+
+#### Batch File Processing
+```python
+from file_processor import batch_extract_text
+
+# Batch process multiple files
+file_paths = ["doc1.pdf", "doc2.docx", "image1.png"]
+results = batch_extract_text(file_paths)
+
+for file_path, result in results.items():
+    if result["success"]:
+        print(f"✓ {file_path}: {len(result['text'])} characters")
+    else:
+        print(f"✗✗ {file_path}: {result['error']}")
+```
+
+## Python Script Usage Example
+```python
+#!/usr/bin/env python3
+from file_processor import extract_text_from_file
+
+def main():
+    # Process different types of files
+    files = [
+        "pdf/sample.pdf",
+        "Doc/demo.pdf", 
+        "Pic/demo.pdf"
+    ]
+    
+    for file_path in files:
+        print(f"\nProcessing file: {file_path}")
+        result = extract_text_from_file(file_path)
+        
+        if result["success"]:
+            print(f"File Type: {result['file_type']}")
+            print(f"Text Length: {len(result['text'])} characters")
+            print("Text Preview:")
+            print(result["text"][:300] + "...")
+        else:
+            print(f"Processing failed: {result['error']}")
+
+if __name__ == "__main__":
+    main()
+```
+
+## Integration in Code
+```python
+# Add tool path
+import sys
+sys.path.append('tools')
+
+from file_processor import extract_text_from_file
+
+# Process file
+result = extract_text_from_file('your_file.pdf')
+if result['success']:
+    print(result['text'])
+```
+
+## Result Format Explanation
+All processors return a unified result format:
+```python
+{
+    "success": bool,        # Whether processing was successful
+    "text": str,           # Extracted text content
+    "error": str,          # Error message (if failed)
+    "file_type": str       # File type (only for unified interface)
+}
+```
+

@@ -1,33 +1,42 @@
 # Webis Installation Steps
 
 ## Prerequisites
-::: warning
-Before installing Webis, please ensure you have the following dependencies:
-:::
+- Python 3.9+
+- Conda environment or uv environment
 
-- **Python 3.10**
-- Recommended: **Conda** for environment management
-- **NVIDIA GPU** (optional, for CUDA acceleration)
+## Environment Configuration
 
-## Method 1: Installation via pip (Recommended)
-Webis
+### Method 1: Automatic Configuration Script (Recommended)
 ```bash
-conda create -n webis python=3.10 -y
-conda activate webis
+# Run the automatic configuration script (for Conda environment)
+bash setup/conda_setup.sh
 
-pip install webis-llm
+# If using uv environment
+bash setup/uv_setup.sh
 ```
 
-## Method 2: Installation from Source
-
+### Method 2: Manual Configuration
 ```bash
-git clone https://github.com/TheBinKing/Webis.git
-cd Webis
+# Create and activate a Conda environment
+conda create -n webis python=3.9 -y
+conda activate webis
 
-pip install -e .
+# Install dependency packages
+pip install -r setup/requirements.txt
+```
 
-# Add bin directory to PATH
-export PATH="$PATH:$(pwd)/bin"
-echo 'export PATH="$PATH:$(pwd)/bin"' >> ~/.bashrc
-source ~/.bashrc
+### Method 3: Using Homebrew (macOS)
+```bash
+# Install Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install Python
+brew install python
+
+# Verify installation
+python3 --version
+pip3 --version
+
+# Install dependencies
+pip install -r setup/requirements.txt
 ```

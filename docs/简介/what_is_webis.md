@@ -1,19 +1,40 @@
 # What is Webis
 
 ::: info
-Webis is an efficient, lightweight **multimodal data extraction tool** designed for developers to extract structured data from webpages and other documents. With simplicity and modularity as its core design principles, it supports the extraction of article content, titles, metadata, and extends to multimodal content such as PDF, DOC, and images. Webis provides intuitive API and Command Line Interface (CLI) to meet diverse data processing scenarios.
+Webis is an efficient, lightweight **multimodal data cleaning and extraction tool** designed for developers to process and extract structured data from diverse file formats. With simplicity and modularity as its core design principles, it supports automatic file type recognition and integrates specialized processors for webpages, documents, PDFs, images, and more. Webis provides intuitive APIs and a Command Line Interface (CLI) to meet diverse data processing scenarios, enabling seamless integration into data analysis, content aggregation, and multimodal data pipelines.
 :::
 
 ## Core Features
 
-Webis parses HTML documents and other file formats, filters out advertisements, navigation bars, and irrelevant elements, and outputs clean structured content in JSON or plain text formats. Its architecture is suitable for data analysis, content aggregation, web crawling, and multimodal data pipelines. Developed based on Python, Webis is compatible with modern development processes and has minimal dependencies, ensuring high performance and portability.
+Webis automatically identifies file types and dispatches them to dedicated processing modules, filtering out noise and irrelevant information to output clean, structured content in JSON or plain text formats. Built with Python, it maintains minimal dependencies while ensuring high performance and portability across modern development environments.
 
-Core features include:
+### Key Capabilities
 
-- **Multimodal Support**: In addition to webpages, it supports PDF, Word documents, image text recognition (OCR), and other content extraction.
-- **Programmatic Access**: Provides a concise API for quick integration.
-- **Command Line Support**: CLI tools can directly complete batch processing.
-- **Flexible Configuration**: Customizable extraction rules to adapt to different page or document structures.
-- **Cross-format Output**: Supports various output formats such as JSON and plain text.
+- **Multimodal Support**: Handles diverse formats including HTML webpages, PDF documents, Word files (.docx), plain text (.txt), Markdown (.md), and images (.png, .jpg, .jpeg, .bmp, .tiff) with OCR capabilities.
+  
+- **Unified Interface**: Provides consistent API endpoints for all file types, simplifying integration into existing workflows. Whether using individual processors or the unified handler, the output format remains consistent.
 
-Whether processing static webpages or cross-modal files (documents, images, etc.), Webis can efficiently complete the task.
+- **Flexible Access**: 
+  - Programmatic access via concise APIs for seamless integration into applications
+  - Command-line tools for batch processing and quick operations
+  - Convenience functions for single-file and bulk processing tasks
+
+- **Intelligent Processing**: 
+  - Webis_HTML (a proprietary component) uses AI-powered extraction for web content
+  - OCR for image text recognition with support for Chinese characters
+  - Structured output preserving document structure (e.g., page numbers in PDFs)
+
+- **Extensible Architecture**: Modular design allows easy addition of new file type processors, adapting to evolving data processing needs.
+
+- **Robust Error Handling**: Comprehensive error reporting and logging ensure reliability in production environments.
+
+## Supported File Types
+
+| Type       | Extensions                              | Processor    | Description                                          |
+|------------|-----------------------------------------|--------------|------------------------------------------------------|
+| Documents  | `.txt`, `.md`, `.docx`                  | LangChain    | Direct text extraction with structure preservation    |
+| PDFs       | `.pdf`                                  | PyPDF        | Page-aware extraction with pagination information     |
+| Images     | `.png`, `.jpg`, `.jpeg`, `.bmp`, `.tiff`| EasyOCR      | Optical character recognition with multi-language support |
+| Webpages   | `.html`                                 | Webis_HTML   | AI-optimized extraction of valuable content from web pages |
+
+Whether processing static web content, office documents, or image-based text, Webis delivers consistent, high-quality results through its specialized processing modules. Its adaptability makes it suitable for applications ranging from content aggregation to data mining and multimodal data pipeline construction.

@@ -58,6 +58,12 @@ uvicorn scripts.start_model_server:app --host 0.0.0.0 --port 8000 --workers 2
    - vLLM supports batch processing of multiple prompts
    - Recommend merging small requests into one API call
 
+3. **Batch Processing**
+   - Use `batch_extract_text()` to process multiple files
+
+4. **Parallel Processing**
+   - For large numbers of files, consider multi-process parallel processing
+
 ## Disk and Model Loading
 
 1. **Cache Models**
@@ -69,6 +75,12 @@ uvicorn scripts.start_model_server:app --host 0.0.0.0 --port 8000 --workers 2
 
 2. **Use SSD Storage**
    Model loading speed is much faster than HDD
+
+3. **Cache Results**
+   - For repeatedly processed files, it is recommended to cache the results
+
+4. **Lazy Loading**
+   - The image processor adopts lazy loading to avoid unnecessary model initialization
 
 ## Network Optimization
 

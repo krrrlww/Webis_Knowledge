@@ -28,7 +28,6 @@ export default defineConfig({
         text: 'Introduction',
         items: [
           { text: 'What is Webis?', link: '/简介/what_is_webis' },
-          { text: 'Performance Evaluation', link: '/简介/performance' },
           { text: 'Supported Data Types', link: '/简介/data_type' },
         ]
       },
