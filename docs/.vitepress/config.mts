@@ -40,20 +40,21 @@ export default defineConfig({
         text: 'Usage',
         items: [
           { text: 'Quickstart', link: '/使用/quickstart' },
+          { text: 'Tool Interface Description', link: '/使用/api' },
         ]
       },
       {
         text: 'More',
         items: [
           { text: 'Troubleshooting', link: '/更多/troubleshooting' },
-          { text: 'Development Background', link: '/更多/background' },
-          { text: 'Multimodal Data Processing Tools', link: '/更多/tool' },
+          { text: 'Background', link: '/更多/background' },
+          { text: 'Introduction to Integrated Tools', link: '/更多/tool' },
         ]
       }
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://anonymous.4open.science/r/Webis-17E3/' }
+      { icon: 'github', link: 'https://github.com/Narwhal-Lab/Webis.git' }
     ],
     footer: {
       copyright: "Copyright © 2025-2026 Webis Development Team",

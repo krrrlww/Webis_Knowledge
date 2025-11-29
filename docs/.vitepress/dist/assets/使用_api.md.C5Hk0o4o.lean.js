@@ -1,0 +1,1 @@
+import{_ as a,c as n,o as e,af as i}from"./chunks/framework.Cm3tdt7z.js";const k=JSON.parse('{"title":"接口说明","description":"","frontmatter":{},"headers":[],"relativePath":"使用/api.md","filePath":"使用/api.md"}'),p={name:"使用/api.md"};function t(l,s,r,o,c,h){return e(),n("div",null,[...s[0]||(s[0]=[i("",26)])])}const u=a(p,[["render",t]]);export{k as __pageData,u as default};

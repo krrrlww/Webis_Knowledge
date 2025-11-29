@@ -1,7 +1,7 @@
 # Webis 快速入门指南
 
 ## 概述
-Webis 是一个支持**文档、PDF、图片、HTML 网页**等多种模态的数据清洗工具。它可以自动识别文件类型，快速调用不同工具批量清洗各种文件，并提供**结构化输出**。目前，Webis 已集成四种模态的数据处理工具，其中 **Webis_HTML** 工具是独立开发的网页数据提取工具，使用 AI 技术自动识别网页上的有价值信息。Webis_HTML 也已作为独立依赖包上传到 PyPi。
+Webis是一条从网络数据爬取、多模态清洗到专题知识库构建的全链路高效流水线，该框架集成**文档、PDF、图片、HTML网页**等多模态数据的清洗工具，可以自动识别文件类型并快速调用不同工具，批量清洗各类文件并提供**结构化输出**。当前Webis已集成四种模态数据处理工具，其中**Webis_HTML**工具为我们独立开发的网页数据提取工具，使用 AI 技术自动识别网页上的有价值信息。Webis_HTML已作为一个独立依赖包同步上传至PyPi。
 
 
 ## 基本使用
@@ -11,130 +11,45 @@ Webis 是一个支持**文档、PDF、图片、HTML 网页**等多种模态的�
 conda activate webis
 ```
 
-### 基本操作
-```bash
+### 快速使用
+
+```
+# 激活环境
+conda activate webis
+
 # 处理单个文件
 python process_file.py tools/data/pdf/example.pdf
 
 # 运行完整演示
 python examples/demo.py
 
+# 运行爬虫知识库演示
+python examples/crawler_demo.py "关键词" --limit 5
+
+```
+
+### 详细使用示例
+
+#### 命令行使用
+
+```
+# 处理单个文件
+python3 file_processor.py document.pdf
+
 # 查看支持的文件类型
 python3 file_processor.py
 ```
 
-## 接口使用示例
+#### Python脚本使用
 
-### 1. 独立处理器接口
-
-#### DocumentProcessor
-```python
-from file_processor import DocumentProcessor
-
-processor = DocumentProcessor()
-
-# 检查文件类型是否支持
-if processor.can_process("test.docx"):
-    # 提取文本
-    result = processor.extract_text("test.docx")
-    if result["success"]:
-        print(result["text"])
-    else:
-        print(f"错误: {result['error']}")
 ```
-
-#### PDFProcessor
-```python
-from file_processor import PDFProcessor
-
-processor = PDFProcessor()
-
-# 从 PDF 提取文本
-result = processor.extract_text("document.pdf")
-if result["success"]:
-    print(result["text"])  # 包含页码信息
-```
-
-#### ImageProcessor (OCR)
-```python
-from file_processor import ImageProcessor
-
-processor = ImageProcessor()
-
-# 对图片进行 OCR
-result = processor.extract_text("image.png")
-if result["success"]:
-    print(result["text"])
-```
-
-#### HTMLProcessor
-```python
-from file_processor import HTMLProcessor
-
-processor = HTMLProcessor()
-
-# 从 HTML 提取文本
-result = processor.extract_text("example.html")
-if result["success"]:
-    print(result["text"])
-```
-
-**API 密钥配置**（可选，用于 AI 优化功能）：
-- 环境变量：`export DEEPSEEK_API_KEY="your-key"` 或 `export LLM_PREDICTOR_API_KEY="your-key"`
-- 在代码中：`HTMLProcessor(api_key="your-key")`
-
-> 注意：要使用 DeepSeek API 进行内容过滤优化，需要配置相应的 API 密钥。不配置 API 密钥也可以正常使用基本功能。
-
-### 2. 统一处理器接口
-```python
-from file_processor import UnifiedFileProcessor
-
-processor = UnifiedFileProcessor()
-
-# 自动判断文件类型并处理
-result = processor.extract_text("any_file.pdf")
-print(f"文件类型: {result['file_type']}")
-print(f"文本内容: {result['text']}")
-```
-
-### 3. 便捷函数接口
-
-#### 单文件处理
-```python
-from file_processor import extract_text_from_file
-
-# 最简单的用法
-result = extract_text_from_file("file.pdf")
-if result["success"]:
-    print(f"文件类型: {result['file_type']}")
-    print(f"文本长度: {len(result['text'])}")
-    print(result["text"])
-```
-
-#### 批量文件处理
-```python
-from file_processor import batch_extract_text
-
-# 批量处理多个文件
-file_paths = ["doc1.pdf", "doc2.docx", "image1.png"]
-results = batch_extract_text(file_paths)
-
-for file_path, result in results.items():
-    if result["success"]:
-        print(f"✓ {file_path}: {len(result['text'])} 个字符")
-    else:
-        print(f"✗✗ {file_path}: {result['error']}")
-```
-
-## Python 脚本使用示例
-```python
 #!/usr/bin/env python3
 from file_processor import extract_text_from_file
 
 def main():
     # 处理不同类型的文件
     files = [
-        "pdf/sample.pdf",
+        "pdf/示例.pdf",
         "Doc/demo.pdf", 
         "Pic/demo.pdf"
     ]
@@ -145,7 +60,7 @@ def main():
         
         if result["success"]:
             print(f"文件类型: {result['file_type']}")
-            print(f"文本长度: {len(result['text'])} 个字符")
+            print(f"文本长度: {len(result['text'])} 字符")
             print("文本预览:")
             print(result["text"][:300] + "...")
         else:
@@ -155,8 +70,9 @@ if __name__ == "__main__":
     main()
 ```
 
-## 代码集成
-```python
+#### 代码中集成使用
+
+```
 # 添加工具路径
 import sys
 sys.path.append('tools')
@@ -169,13 +85,54 @@ if result['success']:
     print(result['text'])
 ```
 
-## 结果格式说明
-所有处理器返回统一的结果格式：
-```python
-{
-    "success": bool,        # 处理是否成功
-    "text": str,           # 提取的文本内容
-    "error": str,          # 错误信息（如果失败）
-    "file_type": str       # 文件类型（仅统一接口返回）
-}
+#### 爬虫知识库演示
+
+`crawler_demo.py` 是一个完整的网络爬虫示例，可以自动搜索、下载并处理网络上的文档材料，生成知识库。
+
+**功能特点**：
+
+- 使用 DuckDuckGo 搜索引擎自动搜索相关材料（PDF、DOC、DOCX、PPT、PPTX、HTML等）
+- 自动下载找到的文件到本地
+- 使用 Webis UnifiedFileProcessor 自动处理下载的文件
+- 生成结构化的知识库 JSON 文件
+
+**使用方法**：
+
 ```
+# 基本用法：搜索关键词并下载处理前5个结果
+python examples/crawler_demo.py "Python教程" --limit 5
+
+# 搜索更多结果
+python examples/crawler_demo.py "机器学习" --limit 10
+
+# 指定文件类型搜索（在关键词中包含 filetype:）
+python examples/crawler_demo.py "深度学习 filetype:pdf" --limit 3
+```
+
+**输出结果**：
+
+- 下载的文件保存在 `examples/outputs/downloaded_materials/` 目录
+- 知识库文件保存在 `examples/outputs/knowledge_base.json`
+- 知识库包含每个文件的处理结果、提取的文本内容、文件类型等信息
+
+**知识库格式**：
+
+```json
+[
+  {
+    "source_file": "example.pdf",
+    "file_type": "pdf",
+    "processed_time": "2025-11-27 14:00:00",
+    "content": "提取的文本内容...",
+    "status": "success",
+    "error": ""
+  }
+]
+```
+
+**注意事项**：
+
+- 需要配置 `DEEPSEEK_API_KEY` 环境变量，请从 [SiliconFlow](https://www.siliconflow.com/) 获取 API 密钥（用于 HTML 处理优化）
+- 搜索功能依赖网络连接，某些网站可能无法访问
+- 下载的文件会保存在 `examples/outputs/downloaded_materials/` 目录
+- 建议使用 `--limit` 参数限制结果数量，避免下载过多文件

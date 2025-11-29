@@ -1,0 +1,60 @@
+import{_ as a,c as n,o as e,af as i}from"./chunks/framework.Cm3tdt7z.js";const k=JSON.parse('{"title":"接口说明","description":"","frontmatter":{},"headers":[],"relativePath":"使用/api.md","filePath":"使用/api.md"}'),p={name:"使用/api.md"};function t(l,s,r,o,c,h){return e(),n("div",null,[...s[0]||(s[0]=[i(`<h1 id="接口说明" tabindex="-1">接口说明 <a class="header-anchor" href="#接口说明" aria-label="Permalink to “接口说明”">​</a></h1><h2 id="_1-单独处理器接口" tabindex="-1">1. 单独处理器接口 <a class="header-anchor" href="#_1-单独处理器接口" aria-label="Permalink to “1. 单独处理器接口”">​</a></h2><h4 id="documentprocessor-文档处理器" tabindex="-1">DocumentProcessor - 文档处理器 <a class="header-anchor" href="#documentprocessor-文档处理器" aria-label="Permalink to “DocumentProcessor - 文档处理器”">​</a></h4><div class="language-"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>from file_processor import DocumentProcessor</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>processor = DocumentProcessor()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 检查是否支持文件类型</span></span>
+<span class="line"><span>if processor.can_process(&quot;test.docx&quot;):</span></span>
+<span class="line"><span>    # 提取文本</span></span>
+<span class="line"><span>    result = processor.extract_text(&quot;test.docx&quot;)</span></span>
+<span class="line"><span>    if result[&quot;success&quot;]:</span></span>
+<span class="line"><span>        print(result[&quot;text&quot;])</span></span>
+<span class="line"><span>    else:</span></span>
+<span class="line"><span>        print(f&quot;错误: {result[&#39;error&#39;]}&quot;)</span></span></code></pre></div><h4 id="pdfprocessor-pdf处理器" tabindex="-1">PDFProcessor - PDF处理器 <a class="header-anchor" href="#pdfprocessor-pdf处理器" aria-label="Permalink to “PDFProcessor - PDF处理器”">​</a></h4><div class="language-"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>from file_processor import PDFProcessor</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>processor = PDFProcessor()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 提取PDF文本</span></span>
+<span class="line"><span>result = processor.extract_text(&quot;document.pdf&quot;)</span></span>
+<span class="line"><span>if result[&quot;success&quot;]:</span></span>
+<span class="line"><span>    print(result[&quot;text&quot;])  # 包含分页信息</span></span></code></pre></div><h4 id="imageprocessor-图片ocr处理器" tabindex="-1">ImageProcessor - 图片OCR处理器 <a class="header-anchor" href="#imageprocessor-图片ocr处理器" aria-label="Permalink to “ImageProcessor - 图片OCR处理器”">​</a></h4><div class="language-"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>from file_processor import ImageProcessor</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>processor = ImageProcessor()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># OCR识别图片</span></span>
+<span class="line"><span>result = processor.extract_text(&quot;image.png&quot;)</span></span>
+<span class="line"><span>if result[&quot;success&quot;]:</span></span>
+<span class="line"><span>    print(result[&quot;text&quot;])</span></span></code></pre></div><blockquote><p><strong>提示</strong>: 第一次使用图片处理器时，会自动下载 EasyOCR 开源模型，会耗费一些时间，请耐心等待，后续使用将直接加载已下载的模型。如果下载失败，建议尝试使用科学上网工具。</p></blockquote><h4 id="htmlprocessor-html处理器" tabindex="-1">HTMLProcessor - HTML处理器 <a class="header-anchor" href="#htmlprocessor-html处理器" aria-label="Permalink to “HTMLProcessor - HTML处理器”">​</a></h4><p><strong>Webis_HTML</strong> 是一个为 Webis 开发的独立的 HTML 网页数据提取工具，<code>html_processor.py</code>通过直接调用 <code>webis-html</code>Python 库实现。</p><ul><li><strong>安装方式</strong>: 通过 <code>pip install webis-html</code>安装，已包含在 <code>requirements.txt</code>中</li><li><strong>无需启动服务器</strong>: <code>webis-html</code>库会自动处理 HTML 内容提取，无需启动额外的服务器</li></ul><p><strong>使用示例</strong>:</p><div class="language-"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>from file_processor import HTMLProcessor</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>processor = HTMLProcessor()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 提取HTML文本</span></span>
+<span class="line"><span>result = processor.extract_text(&quot;example.html&quot;)</span></span>
+<span class="line"><span>if result[&quot;success&quot;]:</span></span>
+<span class="line"><span>    print(result[&quot;text&quot;])</span></span></code></pre></div><p><strong>API 密钥配置</strong>（HTML处理必需）:</p><ul><li><p><strong>获取 API Key</strong>: 请访问 <a href="https://www.siliconflow.com/" target="_blank" rel="noreferrer">SiliconFlow</a> 注册账号并获取 API 密钥</p></li><li><p><strong>配置环境变量</strong>:</p><div class="language-bash"><button title="Copy Code" class="copy"></button><span class="lang">bash</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">export</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> DEEPSEEK_API_KEY</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;your-siliconflow-api-key&quot;</span></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># 或</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">export</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> LLM_PREDICTOR_API_KEY</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;your-siliconflow-api-key&quot;</span></span></code></pre></div></li><li><p><strong>Conda 环境配置</strong>（推荐）:</p><div class="language-bash"><button title="Copy Code" class="copy"></button><span class="lang">bash</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">conda</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> env</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> config</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> vars</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> set</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> DEEPSEEK_API_KEY=&quot;your-siliconflow-api-key&quot;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> -n</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> webis</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">conda</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> activate</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> webis</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">  # 重新激活环境使配置生效</span></span></code></pre></div></li></ul><blockquote><p><strong>注意</strong>: HTML 处理功能需要通过 SiliconFlow API 进行内容过滤优化，需要配置相应的 API 密钥。请从 <a href="https://www.siliconflow.com/" target="_blank" rel="noreferrer">SiliconFlow</a> 获取 API 密钥。不配置 API 密钥则无法使用 HTML 处理功能。</p></blockquote><h2 id="_2-统一处理器接口" tabindex="-1">2. 统一处理器接口 <a class="header-anchor" href="#_2-统一处理器接口" aria-label="Permalink to “2. 统一处理器接口”">​</a></h2><h4 id="unifiedfileprocessor-统一处理器" tabindex="-1">UnifiedFileProcessor - 统一处理器 <a class="header-anchor" href="#unifiedfileprocessor-统一处理器" aria-label="Permalink to “UnifiedFileProcessor - 统一处理器”">​</a></h4><div class="language-"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>from file_processor import UnifiedFileProcessor</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>processor = UnifiedFileProcessor()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 自动判断文件类型并处理</span></span>
+<span class="line"><span>result = processor.extract_text(&quot;any_file.pdf&quot;)</span></span>
+<span class="line"><span>print(f&quot;文件类型: {result[&#39;file_type&#39;]}&quot;)</span></span>
+<span class="line"><span>print(f&quot;文本内容: {result[&#39;text&#39;]}&quot;)</span></span></code></pre></div><h2 id="_3-便捷函数接口" tabindex="-1">3. 便捷函数接口 <a class="header-anchor" href="#_3-便捷函数接口" aria-label="Permalink to “3. 便捷函数接口”">​</a></h2><h4 id="单文件处理" tabindex="-1">单文件处理 <a class="header-anchor" href="#单文件处理" aria-label="Permalink to “单文件处理”">​</a></h4><div class="language-"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>from file_processor import extract_text_from_file</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 最简单的使用方式</span></span>
+<span class="line"><span>result = extract_text_from_file(&quot;file.pdf&quot;)</span></span>
+<span class="line"><span>if result[&quot;success&quot;]:</span></span>
+<span class="line"><span>    print(f&quot;文件类型: {result[&#39;file_type&#39;]}&quot;)</span></span>
+<span class="line"><span>    print(f&quot;文本长度: {len(result[&#39;text&#39;])}&quot;)</span></span>
+<span class="line"><span>    print(result[&quot;text&quot;])</span></span></code></pre></div><h4 id="批量文件处理" tabindex="-1">批量文件处理 <a class="header-anchor" href="#批量文件处理" aria-label="Permalink to “批量文件处理”">​</a></h4><div class="language-"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>from file_processor import batch_extract_text</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 批量处理多个文件</span></span>
+<span class="line"><span>file_paths = [&quot;doc1.pdf&quot;, &quot;doc2.docx&quot;, &quot;image1.png&quot;]</span></span>
+<span class="line"><span>results = batch_extract_text(file_paths)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>for file_path, result in results.items():</span></span>
+<span class="line"><span>    if result[&quot;success&quot;]:</span></span>
+<span class="line"><span>        print(f&quot;{file_path}: {len(result[&#39;text&#39;])} 字符&quot;)</span></span>
+<span class="line"><span>    else:</span></span>
+<span class="line"><span>        print(f&quot;{file_path}: {result[&#39;error&#39;]}&quot;)</span></span></code></pre></div><h2 id="" tabindex="-1"><a class="header-anchor" href="#" aria-label="Permalink to “”">​</a></h2>`,26)])])}const u=a(p,[["render",t]]);export{k as __pageData,u as default};
